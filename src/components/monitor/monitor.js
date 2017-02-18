@@ -75,11 +75,7 @@ angular.module('tca').component('monitor', {
                     
             this.ordersGridOptions = {
                 columnDefs: columnDefs,
-                onGridReady: function(event) {       
-                    manager.init(data => {
-                        this.api.setRowData(data);
-                    });      
-                }
+                manager: manager
             };
         }
     }
