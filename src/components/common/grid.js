@@ -15,20 +15,21 @@ app.component('genesisGrid', {
                 console.log("received data");
 
                 this.options.api.setRowData(data);
+                
             }, columns);
         }
         
         this.$onInit = () => {
+            this.options.onGridReady = event => { 
+                this.loadData();
+            }
+                        
             this.options.onColumnVisible = event => {
                 console.log(event);
                 
                 this.loadData();
             }
-            
-            this.options.onGridReady = event => { 
-                this.loadData();
-            }
-            
+                    
             this.options.onColumnGroupOpened = event => { 
                 this.loadData();
             }

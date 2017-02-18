@@ -89,6 +89,10 @@ app.config(function($stateProvider, $urlServiceProvider) {
         abstract: true,
         component: "layout"
     })
+    .state('auth.analytics', {
+        url: '/analytics',
+        component: "analytics"
+    })
     .state('auth.monitor', {
         url: '/monitor',
         component: "monitor"
