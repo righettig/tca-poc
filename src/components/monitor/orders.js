@@ -1,4 +1,4 @@
-angular.module("tca").component("orders", {
+app.component("orders", {
     template: 
     '<genesis-grid name="Orders" options="$ctrl.gridOptions"></genesis-grid>',
     
@@ -20,7 +20,7 @@ angular.module("tca").component("orders", {
     }
 })
 
-angular.module('tca').service("OrdersManager", function(OrderStateCriteria, StartDateCriteria, DTA) {
+app.service("OrdersManager", function(OrderStateCriteria, StartDateCriteria, DTA) {
     this.params = {};
     
     this.stream = null;

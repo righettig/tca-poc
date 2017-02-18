@@ -1,4 +1,4 @@
-angular.module('tca').component("filter", {
+app.component("filter", {
     templateUrl: 'src/components/monitor/filter.html',
     bindings: {
         onFilterChanged: "&"

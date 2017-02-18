@@ -1,4 +1,4 @@
-angular.module('tca').service("StartDateCriteria", function() {
+app.service("StartDateCriteria", function() {
     this.build = function(value) {
         var result = ""        
         
@@ -10,7 +10,7 @@ angular.module('tca').service("StartDateCriteria", function() {
     }
 });    
     
-angular.module('tca').service("OrderStateCriteria", function() {
+app.service("OrderStateCriteria", function() {
     this.build = function(value) {
         var result = "";
         

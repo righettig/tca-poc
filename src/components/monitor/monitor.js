@@ -1,4 +1,4 @@
-angular.module('tca').component('monitor', {
+app.component('monitor', {
     templateUrl: 'src/components/monitor/monitor.html',
     controller: function(OrdersManager, RoutesManager, FillsManager) {        
         this.onFilterChanged = function (name, value) {

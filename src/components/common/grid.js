@@ -1,6 +1,6 @@
 // TODO: service to deal with INSERT, MODIFY, and DELETE messages 
 
-angular.module('tca').component('genesisGrid', {
+app.component('genesisGrid', {
     templateUrl: 'src/components/common/grid.html',
     bindings: {
         name: "@",

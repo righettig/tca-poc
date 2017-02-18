@@ -1,4 +1,4 @@
-angular.module('tca').service("DTA", function() {
+app.service("DTA", function() {
     this.stream = function(resource, params) {
         console.log(resource);
         console.log(params);

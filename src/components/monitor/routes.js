@@ -1,4 +1,4 @@
-angular.module("tca").component("routes", {
+app.component("routes", {
     template: 
     '<genesis-grid name="Routes" options="$ctrl.gridOptions"></genesis-grid>',
     
@@ -20,5 +20,5 @@ angular.module("tca").component("routes", {
     }
 })
 
-angular.module('tca').service("RoutesManager", function(OrderStateCriteria, StartDateCriteria, DTA) {
+app.service("RoutesManager", function(OrderStateCriteria, StartDateCriteria, DTA) {
 });

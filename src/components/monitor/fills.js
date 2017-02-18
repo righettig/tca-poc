@@ -1,4 +1,4 @@
-angular.module("tca").component("fills", {
+app.component("fills", {
     template: 
     '<genesis-grid name="Fills" options="$ctrl.gridOptions"></genesis-grid>',
     
@@ -20,5 +20,5 @@ angular.module("tca").component("fills", {
     }
 })
 
-angular.module('tca').service("FillsManager", function(OrderStateCriteria, StartDateCriteria, DTA) {
+app.service("FillsManager", function(OrderStateCriteria, StartDateCriteria, DTA) {
 });
