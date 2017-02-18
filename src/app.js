@@ -1,4 +1,6 @@
-var app = angular.module("tca", ["ngRoute"]);
+agGrid.initialiseAgGridWithAngular1(angular);
+
+var app = angular.module("tca", ["ngRoute", "agGrid"]);
 
 app.config(function($routeProvider) {
     $routeProvider

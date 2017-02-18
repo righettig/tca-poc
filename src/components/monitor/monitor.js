@@ -46,6 +46,33 @@ angular.module('tca').component('monitor', {
         this.$onInit = function() {
             this.page = "orders";
             
+            var columnDefs = [
+                {headerName: "Id", field: "ORDER_ID"},
+                {headerName: "Entry Datetime", field: "ENTRY_DATETIME"},
+                {headerName: "State", field: "ORDER_STATE"},
+                {headerName: "Client", field: "CLIENT_ID"},
+                {headerName: "Symbol", field: "INSTRUMENT_CODE"},
+                {headerName: "Basket Id", field: "BASKET_ID"},
+                {headerName: "Desk Id", field: "DESK_ID"},
+            ];
+
+            var rowData = [
+                {
+                    ORDER_ID: "ORD0001", 
+                    ENTRY_DATETIME: "20-02-2017", 
+                    ORDER_STATE: "OPEN",
+                    CLIENT_ID: "CLN0001",
+                    INSTRUMENT_CODE: "AAPL",
+                    BASKET_ID: "BSK0001",
+                    DESK_ID: "DSK0001"
+                }
+            ];
+
+            this.ordersGridOptions = {
+                columnDefs: columnDefs,
+                rowData: rowData
+            };
+            
             var manager;
             
             switch (this.page) {
