@@ -46,6 +46,7 @@ app.service("OrdersManager", function(OrderStateCriteria, StartDateCriteria, DTA
     
     this.stream = null;
     this.onDataFn = null;
+    this.columns = null;
     
     this.onFilterChanged = function (name, value) {
         this.params[name] = value;
@@ -55,12 +56,13 @@ app.service("OrdersManager", function(OrderStateCriteria, StartDateCriteria, DTA
     
     this.init = function(onDataFn, columns) {
         this.onDataFn = onDataFn;
+        this.columns = columns.join(" ");
         
         // TODO: read from localstorage
         this.params.status = "any";
         this.params.startDate = "15-05-2016";
         
-        this.createNewSubscription(columns);
+        this.createNewSubscription();
     }
     
     this.cleanup = function() {
@@ -69,9 +71,9 @@ app.service("OrdersManager", function(OrderStateCriteria, StartDateCriteria, DTA
         }
     }
     
-    this.createNewSubscription = function (columns) {
+    this.createNewSubscription = function () {
         var params = {
-            columns: columns.join(" "),
+            columns: this.columns,
             criteria: "PARENT_CHILD == 'P'" + 
                 OrderStateCriteria.build(this.params['status']) +
                 StartDateCriteria.build(this.params['startDate'])

@@ -32,15 +32,11 @@ app.component('genesisGrid', {
                 this.loadData();
             }
                         
-            this.options.onColumnVisible = event => {
-                console.log(event);
-                
-                this.loadData();
-            }
-                    
-            this.options.onColumnGroupOpened = event => { 
-                this.loadData();
-            }
+            this.options.onColumnVisible =                     
+            this.options.onColumnGroupOpened = 
+                event => { 
+                    this.loadData();
+                }
         }
         
         // a,b,c + a,d=> a,b,c,d
