@@ -1,0 +1,29 @@
+{
+  "name": "tca-poc",
+  "version": "1.0.0",
+  "description": "A poc application for the next version of TCA",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/righettig/tca-poc.git"
+  },
+  "author": "Giacomo Righetti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/righettig/tca-poc/issues"
+  },
+  "homepage": "https://github.com/righettig/tca-poc#readme",
+  "dependencies": {
+    "angular": "1.6.2"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.6.2",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.4.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.2"
+  }
+}
