@@ -116,6 +116,8 @@ angular.module('tca').service("OrdersManager", function(OrderStateCriteria, Star
                 StartDateCriteria.build(this.params['startDate'])
         }
     
+        this.cleanup();
+        
         this.stream = 
             DTA.stream("ALL_ORDERS", params);
         

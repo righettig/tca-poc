@@ -4,6 +4,9 @@ angular.module('tca').service("DTA", function() {
         console.log(params);
         
         return {
+            dispose: () => {
+                console.log("stream disposed"); 
+            },
             subscribe: function(onDataFn) {
                 var rowData = [{
                     ORDER_ID: "ORD0001", 
