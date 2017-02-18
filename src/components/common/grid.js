@@ -6,14 +6,31 @@ app.component('genesisGrid', {
         name: "@",
         options: "<"
     },
-    controller: function() {    
+    controller: function() {
+        this.loadData = () => {
+            var columns = 
+                this.options.columnApi.getAllDisplayedColumns().map(c => c.colId);
+                
+            this.options.manager.init(data => {
+                console.log("received data");
+
+                this.options.api.setRowData(data);
+            }, columns);
+        }
+        
         this.$onInit = () => {
-            this.options.onGridReady = event => {       
-                this.options.manager.init(data => {
-                    console.log("received data");
-                    
-                    this.options.api.setRowData(data);
-                });      
+            this.options.onColumnVisible = event => {
+                console.log(event);
+                
+                this.loadData();
+            }
+            
+            this.options.onGridReady = event => { 
+                this.loadData();
+            }
+            
+            this.options.onColumnGroupOpened = event => { 
+                this.loadData();
             }
         }
     }

@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "ag-grid": "^8.0.1",
+    "ag-grid-enterprise": "^8.0.1",
     "angular-mocks": "^1.6.2",
     "bootstrap": "^3.3.7",
     "jasmine-core": "^2.5.2",
