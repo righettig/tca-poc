@@ -9,7 +9,7 @@ let app = angular.module("tca", [
 ]);
 
 app.config(function (localStorageServiceProvider) {
-    localStorageServiceProvider.setPrefix('app');
+    localStorageServiceProvider.setPrefix('tca');
 });
 
 app.config(function(IdleProvider, KeepaliveProvider) {
@@ -93,18 +93,18 @@ app.config(function($stateProvider, $urlServiceProvider) {
         url: '/monitor',
         component: "monitor"
     })
-//    .state('auth.monitor.orders', {
-//        url: '/orders',
-//        component: "orders"
-//    })
-//    .state('auth.monitor.routes', {
-//        url: '/routes',
-//        component: "routes"
-//    })
-//    .state('auth.monitor.fills', {
-//        url: '/fills',
-//        component: "fills"
-//    })
+    .state('auth.monitor.orders', {
+        url: '/orders',
+        component: "orders"
+    })
+    .state('auth.monitor.routes', {
+        url: '/routes',
+        component: "routes"
+    })
+    .state('auth.monitor.fills', {
+        url: '/fills',
+        component: "fills"
+    })
     .state('auth.about', {
         url: '/about',
         component: "about"
@@ -129,13 +129,13 @@ app.factory('AuthService', function(localStorageService, Idle) {
     return {
         login: () => {
             localStorageService.set("token", "test");
-            Idle.watch();
+            //Idle.watch();
     
             authenticated = true;
         },
         logout: () => {
             localStorageService.remove("token");
-            Idle.unwatch();
+            //Idle.unwatch();
             
             authenticated = false;
         },
