@@ -110,37 +110,3 @@ app.config(function($stateProvider, $urlServiceProvider) {
         component: "about"
     });
 });
-
-app.component("login", {
-    template: "<button ng-click='$ctrl.login()'>Login</button>",
-    
-    controller: function(AuthService, defaultState, $state) {
-        this.login = function() {
-            AuthService.login();
-            
-            $state.go(defaultState);
-        }
-    }
-})
-
-app.factory('AuthService', function(localStorageService, Idle) {
-    var authenticated = false;
-        
-    return {
-        login: () => {
-            localStorageService.set("token", "test");
-            //Idle.watch();
-    
-            authenticated = true;
-        },
-        logout: () => {
-            localStorageService.remove("token");
-            //Idle.unwatch();
-            
-            authenticated = false;
-        },
-        isAuthenticated: () => {
-            return authenticated;
-        }
-    };
-});

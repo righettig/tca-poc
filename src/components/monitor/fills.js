@@ -17,6 +17,10 @@ app.component("fills", {
             columnDefs: columnDefs,
             manager: FillsManager
         };
+        
+        this.$onDestroy = function() {
+            FillsManager.cleanup();
+        }
     }
 })
 

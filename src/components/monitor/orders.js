@@ -17,6 +17,10 @@ app.component("orders", {
             columnDefs: columnDefs,
             manager: OrdersManager
         };
+        
+        this.$onDestroy = function() {
+            OrdersManager.cleanup();
+        }
     }
 })
 

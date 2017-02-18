@@ -17,6 +17,10 @@ app.component("routes", {
             columnDefs: columnDefs,
             manager: RoutesManager
         };
+        
+        this.$onDestroy = function() {
+            RoutesManager.cleanup();
+        }
     }
 })
 
