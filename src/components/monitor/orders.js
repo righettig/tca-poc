@@ -4,7 +4,7 @@ app.component("orders", {
     
     controller: function(OrdersManager) {
         var columnDefs = [
-            {
+/*            {
                 headerName: "Athlete Details",
                 children: [
                     {headerName: "Sport", field: "sport"},
@@ -20,7 +20,7 @@ app.component("orders", {
                         ]
                     }
                 ]
-            },
+            },*/
             {headerName: "Id", field: "ORDER_ID"},
             {headerName: "Entry Datetime", field: "ENTRY_DATETIME"},
             {headerName: "State", field: "ORDER_STATE", isMandatory: true},
