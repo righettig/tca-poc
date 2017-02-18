@@ -24,5 +24,33 @@ app.component("routes", {
     }
 })
 
-app.service("RoutesManager", function(OrderStateCriteria, StartDateCriteria, DTA) {
-});
+class RoutesManager extends ResourceManager {
+    constructor(
+        OrderStateCriteria, 
+        StartDateCriteria,
+        DTA) {
+        super(DTA);
+            
+        this.OrderStateCriteria = OrderStateCriteria;
+        this.StartDateCriteria = StartDateCriteria;
+    }
+    
+    createNewSubscription() {
+        var params = {
+            columns: this.columns,
+            criteria: "PARENT_CHILD == 'C'" + 
+                this.OrderStateCriteria.build(this.params['status']) +
+                this.StartDateCriteria.build(this.params['startDate'])
+        }
+    
+        this.cleanup();
+        
+        this.stream = 
+            this.DTA.stream("ALL_ORDERS", params);
+        
+        this.stream.subscribe(this.onDataFn);
+    }
+}
+RoutesManager.$inject = ["OrderStateCriteria", "StartDateCriteria", "DTA"];
+
+app.service("RoutesManager", RoutesManager);

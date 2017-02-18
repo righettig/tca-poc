@@ -24,5 +24,29 @@ app.component("fills", {
     }
 })
 
-app.service("FillsManager", function(OrderStateCriteria, StartDateCriteria, DTA) {
-});
+class FillsManager extends ResourceManager {
+    constructor(
+        StartDateCriteria,
+        DTA) {
+        super(DTA);
+            
+        this.StartDateCriteria = StartDateCriteria;
+    }
+    
+    createNewSubscription() {
+        var params = {
+            columns: this.columns,
+            criteria: "true " + this.StartDateCriteria.build(this.params['startDate'])
+        }
+    
+        this.cleanup();
+        
+        this.stream = 
+            this.DTA.stream("ALL_TRADES", params);
+        
+        this.stream.subscribe(this.onDataFn);
+    }
+}
+FillsManager.$inject = ["StartDateCriteria", "DTA"];
+
+app.service("FillsManager", FillsManager);

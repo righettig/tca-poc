@@ -41,20 +41,33 @@ app.component("orders", {
     }
 })
 
-app.service("OrdersManager", function(OrderStateCriteria, StartDateCriteria, DTA) {
-    this.params = {};
+class ResourceManager {
+    constructor(DTA) {
+        if (new.target === ResourceManager) {
+            throw new TypeError("Cannot construct ResourceManager instances directly");
+        }
+        
+        if (this.createNewSubscription === undefined) {
+            // or maybe test typeof this.method === "function"
+            throw new TypeError("Must override method");
+        }
+        
+        this.params = {};
     
-    this.stream = null;
-    this.onDataFn = null;
-    this.columns = null;
-    
-    this.onFilterChanged = function (name, value) {
+        this.stream = null;
+        this.onDataFn = null;
+        this.columns = null;
+        
+        this.DTA = DTA;
+    }
+        
+    onFilterChanged(name, value) {
         this.params[name] = value;
         
         this.createNewSubscription();
     }
     
-    this.init = function(onDataFn, columns) {
+    init(onDataFn, columns) {
         this.onDataFn = onDataFn;
         this.columns = columns.join(" ");
         
@@ -65,25 +78,40 @@ app.service("OrdersManager", function(OrderStateCriteria, StartDateCriteria, DTA
         this.createNewSubscription();
     }
     
-    this.cleanup = function() {
+    cleanup() {
         if (this.stream) {
             this.stream.dispose();    
         }
     }
+}
+
+class OrdersManager extends ResourceManager {
+    constructor(
+        OrderStateCriteria, 
+        StartDateCriteria,
+        DTA) {
+        super(DTA);
+            
+        this.OrderStateCriteria = OrderStateCriteria;
+        this.StartDateCriteria = StartDateCriteria;
+    }
     
-    this.createNewSubscription = function () {
+    createNewSubscription() {
         var params = {
             columns: this.columns,
             criteria: "PARENT_CHILD == 'P'" + 
-                OrderStateCriteria.build(this.params['status']) +
-                StartDateCriteria.build(this.params['startDate'])
+                this.OrderStateCriteria.build(this.params['status']) +
+                this.StartDateCriteria.build(this.params['startDate'])
         }
     
         this.cleanup();
         
         this.stream = 
-            DTA.stream("ALL_ORDERS", params);
+            this.DTA.stream("ALL_ORDERS", params);
         
         this.stream.subscribe(this.onDataFn);
     }
-});
+}
+OrdersManager.$inject = ["OrderStateCriteria", "StartDateCriteria", "DTA"];
+
+app.service("OrdersManager", OrdersManager);
