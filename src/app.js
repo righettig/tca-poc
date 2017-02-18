@@ -77,8 +77,8 @@ app.component("tcaApp", {
 app.constant('defaultState', "auth.monitor");
 
 app.config(function($stateProvider, $urlServiceProvider) { 
-  //$urlServiceProvider.rules.when('/monitor', '/monitor/orders')
-  $urlServiceProvider.rules.when('/', '/login')
+  $urlServiceProvider.rules.when('/monitor', '/monitor/orders')
+  //$urlServiceProvider.rules.when('/', '/login')
     
   $stateProvider
     .state("login", {
