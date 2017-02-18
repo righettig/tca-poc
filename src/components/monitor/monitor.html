@@ -1,5 +1,29 @@
-<filter on-filter-changed="$ctrl.onFilterChanged(name, value)"></filter>
+<div class="container">
+    <div class="row">
+    
+        <div class="col-md-3">
+            <filter on-filter-changed="$ctrl.onFilterChanged(name, value)"></filter>
+        </div>
+        
+        <div class="col-md-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#orders">Orders</a></li>
+                <li><a data-toggle="tab" href="#routes">Routes</a></li>
+                <li><a data-toggle="tab" href="#fills">Fills</a></li>
+            </ul>
 
-<genesis-grid name="Orders"></genesis-grid>
-<genesis-grid name="Routes"></genesis-grid>
-<genesis-grid name="Fills"></genesis-grid>
+            <div class="tab-content">
+                <div id="orders" class="tab-pane fade in active">
+                    <genesis-grid name="Orders"></genesis-grid>
+                </div>
+                <div id="routes" class="tab-pane fade">
+                    <genesis-grid name="Routes"></genesis-grid>
+                </div>
+                <div id="fills" class="tab-pane fade">
+                    <genesis-grid name="Fills"></genesis-grid>
+                </div>
+            </div>
+        </div>    
+            
+    </div>
+</div>

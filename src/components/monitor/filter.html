@@ -1,2 +1,47 @@
-<button ng-click="$ctrl.onFilterChanged({name:'status', value:'ACTIVE'})">STATUS CHANGED</button>
-<button ng-click="$ctrl.onFilterChanged({name:'startDate', value:'18-02-2017'})">START DATE CHANGED</button>
+<div>
+    <button ng-click="$ctrl.onFilterChanged({name:'status', value:'ACTIVE'})">
+        Active
+    </button>
+    <button ng-click="$ctrl.onFilterChanged({name:'status', value:'CLOSED'})">
+        Closed
+    </button>
+    <button ng-click="$ctrl.onFilterChanged({name:'status', value:'ANY'})">
+        Any
+    </button>
+</div>
+
+<div style="padding-top: 4px; padding-bottom: 4px;">
+    <div>
+        Client "CLN001"
+        <button ng-click="$ctrl.onFilterChanged({name:'client', value:'CLN001'})">✓</button>
+        <button ng-click="$ctrl.onFilterChanged({name:'client', value:null})">x</button>
+    </div>
+    <div>
+        Symbol "AAPL"
+        <button ng-click="$ctrl.onFilterChanged({name:'symbol', value:'AAPL'})">✓</button>
+        <button ng-click="$ctrl.onFilterChanged({name:'symbol', value:null})">x</button>
+    </div>
+    <div>
+        Basket "BSK001"
+        <button ng-click="$ctrl.onFilterChanged({name:'basket', value:'BSK001'})">✓</button>
+        <button ng-click="$ctrl.onFilterChanged({name:'basket', value:null})">x</button>
+    </div>
+    <div>
+        Desk "DSK001"
+        <button ng-click="$ctrl.onFilterChanged({name:'desk', value:'DSK001'})">✓</button>
+        <button ng-click="$ctrl.onFilterChanged({name:'desk', value:null})">x</button>
+    </div>
+</div>
+
+<div>
+    <button ng-click="$ctrl.onFilterChanged({name:'startDate', value:'01-02-2017'})">
+        Set start date to 01-02-2017
+    </button>
+    <button ng-click="$ctrl.onFilterChanged({name:'endDate', value:'18-02-2017'})">
+        Set end date to 18-02-2017
+    </button>
+</div>
+
+<button ng-click="$ctrl.onFilterChanged(null)">
+    Clear filters
+</button>
