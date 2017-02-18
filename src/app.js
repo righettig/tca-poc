@@ -32,7 +32,46 @@ app.run(function($uiRouter, $trace) {
 app.component("tcaApp", {
     template: `
         <div ui-view ng-cloak"><login></login></div>
-    `
+    `,
+    controller: function($scope, $state, AuthService, Notification) {
+        $scope.$on('IdleStart', function() {
+            // the user appears to have gone idle
+            console.log("IdleStart");
+        });
+
+        $scope.$on('IdleWarn', function(e, countdown) {
+            // follows after the IdleStart event, but includes a countdown until the user is considered timed out
+            // the countdown arg is the number of seconds remaining until then.
+            // you can change the title or display a warning dialog from here.
+            // you can let them resume their session by calling Idle.watch()
+            console.log("IdleWarn");
+            
+            if (countdown === 3) {
+                Notification({message: 'Idle warning notification'}, 'warning');    
+            }
+        });
+
+        $scope.$on('IdleTimeout', function() {
+            // the user has timed out (meaning idleDuration + timeout has passed without any activity)
+            // this is where you'd log them
+            console.log("IdleTimeout");
+            
+            AuthService.logout();
+            $state.go("login");
+            
+            Notification.error({message: 'Error notification (no timeout)', delay: null});
+        });
+
+        $scope.$on('IdleEnd', function() {
+            // the user has come back from AFK and is doing stuff. if you are warning them, you can use this to hide the dialog
+            console.log("IdleEnd");
+        });
+
+        $scope.$on('Keepalive', function() {
+            // do something to keep the user's session alive
+            console.log("Keepalive");
+        });
+    }
 });
 
 app.constant('defaultState', "auth.monitor");
@@ -54,6 +93,18 @@ app.config(function($stateProvider, $urlServiceProvider) {
         url: '/monitor',
         component: "monitor"
     })
+//    .state('auth.monitor.orders', {
+//        url: '/orders',
+//        component: "orders"
+//    })
+//    .state('auth.monitor.routes', {
+//        url: '/routes',
+//        component: "routes"
+//    })
+//    .state('auth.monitor.fills', {
+//        url: '/fills',
+//        component: "fills"
+//    })
     .state('auth.about', {
         url: '/about',
         component: "about"
@@ -72,19 +123,19 @@ app.component("login", {
     }
 })
 
-app.factory('AuthService', function() {
+app.factory('AuthService', function(localStorageService, Idle) {
     var authenticated = false;
         
     return {
         login: () => {
-            //localStorageService.set("token", "test");
-            //Idle.watch();
+            localStorageService.set("token", "test");
+            Idle.watch();
     
             authenticated = true;
         },
         logout: () => {
-            //localStorageService.remove("token");
-            //Idle.unwatch();
+            localStorageService.remove("token");
+            Idle.unwatch();
             
             authenticated = false;
         },
