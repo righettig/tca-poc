@@ -74,6 +74,10 @@ class ResourceManager {
         this.createNewSubscription();
     }
     
+    loadMoreData() {
+        //this.DTA.moreRows(this.stream);
+    }
+    
     createNewSubscription() {
         var params = {
             columns: this.columns                

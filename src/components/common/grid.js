@@ -61,8 +61,9 @@ app.component('genesisGrid', {
 
                     console.log(threshold);
                     if (threshold <= 400) {
-                        //this.options.api.showLoadingOverlay();
-                        console.log("MORE_ROWS");
+                        this.options.api.showLoadingOverlay();
+                        
+                        this.options.manager.loadMoreData();
                     }
                 }, 400));
         }
