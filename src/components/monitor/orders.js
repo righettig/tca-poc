@@ -31,6 +31,7 @@ app.component("orders", {
         ];
         
         this.gridOptions = {
+            //suppressMoreRows: true,
             columnDefs: columnDefs,
             manager: OrdersManager
         };

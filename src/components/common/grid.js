@@ -17,27 +17,10 @@ app.component('genesisGrid', {
                         .filter(c => c.isMandatory)
                         .map(c => c.field);
                 
-                var viewport = $("#" + this.id + " .ag-body-viewport");
-                var gridHeight = $("#" + this.id + " .ag-body-container");
-                var prevLeft = 0; // we want to ignore horizontal scrolls
-                
-                viewport.scroll(
-                    _.throttle(() => {
-                        var currentLeft = viewport.scrollLeft();
-                        if (prevLeft !== currentLeft) {
-                            prevLeft = currentLeft;
-                            return;
-                        }
-                        var threshold = 
-                            gridHeight.height() - (viewport.height() + viewport.scrollTop());
-                        
-                        console.log(threshold);
-                        if (threshold <= 400) {
-                            //this.options.api.showLoadingOverlay();
-                            console.log("MORE_ROWS");
-                        }
-                    }, 400));
-                
+                if (!this.options.suppressMoreRows) {
+                    this.registerMoreRows();
+                }
+                            
                 this.loadData();
             }
                         
@@ -59,6 +42,29 @@ app.component('genesisGrid', {
                 this.options.api.setRowData(data);
                 
             }, columns);
+        }
+        
+        this.registerMoreRows = () => {
+            var viewport = $("#" + this.id + " .ag-body-viewport");
+            var gridHeight = $("#" + this.id + " .ag-body-container");
+            var prevLeft = 0; // we want to ignore horizontal scrolls
+
+            viewport.scroll(
+                _.throttle(() => {
+                    var currentLeft = viewport.scrollLeft();
+                    if (prevLeft !== currentLeft) {
+                        prevLeft = currentLeft;
+                        return;
+                    }
+                    var threshold = 
+                        gridHeight.height() - (viewport.height() + viewport.scrollTop());
+
+                    console.log(threshold);
+                    if (threshold <= 400) {
+                        //this.options.api.showLoadingOverlay();
+                        console.log("MORE_ROWS");
+                    }
+                }, 400));
         }
         
         this.mandatoryFields = [];
