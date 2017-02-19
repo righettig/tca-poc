@@ -6,9 +6,9 @@ app.component('genesisGrid', {
         name: "@",
         options: "<"
     },
-    controller: function($element) {
+    controller: function($element, _) {
         this.$onInit = () => {
-            this.id = this.createGuid();
+            this.id = _.guid();
             $element.attr("id", this.id)
             
             this.options.onGridReady = event => {
@@ -22,7 +22,7 @@ app.component('genesisGrid', {
                 var prevLeft = 0; // we want to ignore horizontal scrolls
                 
                 viewport.scroll(
-                    this.throttle(() => {
+                    _.throttle(() => {
                         var currentLeft = viewport.scrollLeft();
                         if (prevLeft !== currentLeft) {
                             prevLeft = currentLeft;
@@ -50,7 +50,7 @@ app.component('genesisGrid', {
         
         this.loadData = () => {
             var columns = 
-                this.merge(
+                _.merge(
                     this.options.columnApi.getAllDisplayedColumns().map(c => c.colId), this.mandatoryFields);
             
             this.options.manager.loadData(data => {
@@ -61,38 +61,6 @@ app.component('genesisGrid', {
             }, columns);
         }
         
-        this.mandatoryFields = []; 
-        
-        this.throttle = function(callback, limit) {
-                var wait = false;               // Initially, we're not waiting
-                return function() {             // We return a throttled function
-                    if (!wait) {                // If we're not waiting
-                        callback.call();        // Execute users function
-                        wait = true;            // Prevent future invocations
-                        setTimeout(function() { // After a period of time
-                            wait = false;       // And allow future invocations
-                        }, limit);
-                    }
-                }
-            }
-        
-        this.createGuid = 
-            () =>
-                'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {  
-                    var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);  
-                    return v.toString(16);  
-                });
-        
-        // a,b,c + a,d=> a,b,c,d
-        this.merge = 
-            (i,x) => {
-                h={};
-                n=[];
-                i.concat(x)
-                    .map(b => {
-                        h[b] = h[b] || n.push(b)
-                    });
-                return n;
-            }
+        this.mandatoryFields = [];
     }
 });
