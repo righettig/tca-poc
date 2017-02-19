@@ -12,9 +12,11 @@
 
 <div style="padding-top: 4px; padding-bottom: 4px;">
     <div>
-        Client "CLN001"
-        <button ng-click="$ctrl.onFilterChanged({name:'client', value:'CLN001'})">✓</button>
-        <button ng-click="$ctrl.onFilterChanged({name:'client', value:null})">x</button>
+        Client
+        <select ng-model="selectedClient" 
+                ng-options="c for c in $ctrl.clients" 
+                ng-change="$ctrl.onFilterChanged({name:'client', value:selectedClient})"></select>
+        <button ng-click="$ctrl.onFilterChanged({name:'client', value:null});selectedClient=null">x</button>
     </div>
     <div>
         Symbol "AAPL"
