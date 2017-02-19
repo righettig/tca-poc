@@ -120,7 +120,7 @@ OrdersManager.$inject = ["DTA", "CriteriaBuilder"];
 app.service("OrdersManager", OrdersManager);
 
 app.service("FiltersCache", function() {
-    this.filters = [];
+    this.filters = {};
 
     this.register = 
         (name, filter) => {
@@ -138,8 +138,11 @@ app.run(function(FiltersCache) {
         apply: value => {
             var result = "";
             
-            if (value === "active") {
-                result = '(ORDER_STATE === "OPEN" || ORDER_STATE === "ASSIGNED")';    
+            if (value.toLowerCase() === "active") {
+                result = '(ORDER_STATE === "OPEN" || ORDER_STATE === "ASSIGNED")';
+                
+            } else if (value.toLowerCase() === "closed") {
+                result = '(ORDER_STATE === "CLOSED" || ORDER_STATE === "FILLED")';
             }
             
             return result;
@@ -190,7 +193,9 @@ class CriteriaBuilder {
     
     build(filters, params) {
 		return filters
-			.map(f => this.filtersCache.get(f).apply(params[f]))
+			.map(f => {
+                return this.filtersCache.get(f).apply(params[f]);
+            })
 			.reduce((a,p, i) => {
                 if (p) {
                     if (a) {
