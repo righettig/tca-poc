@@ -7,21 +7,6 @@ app.component('genesisGrid', {
         options: "<"
     },
     controller: function() {
-        this.mandatoryFields = [];
-            
-        this.loadData = () => {
-            var columns = 
-                this.merge(
-                    this.options.columnApi.getAllDisplayedColumns().map(c => c.colId), this.mandatoryFields);
-            
-            this.options.manager.init(data => {
-                console.log("received data");
-
-                this.options.api.setRowData(data);
-                
-            }, columns);
-        }
-        
         this.$onInit = () => {
             this.options.onGridReady = event => {
                 this.mandatoryFields = 
@@ -38,6 +23,21 @@ app.component('genesisGrid', {
                     this.loadData();
                 }
         }
+        
+        this.loadData = () => {
+            var columns = 
+                this.merge(
+                    this.options.columnApi.getAllDisplayedColumns().map(c => c.colId), this.mandatoryFields);
+            
+            this.options.manager.init(data => {
+                console.log("received data");
+
+                this.options.api.setRowData(data);
+                
+            }, columns);
+        }
+        
+        this.mandatoryFields = []; 
         
         // a,b,c + a,d=> a,b,c,d
         this.merge = 

@@ -1,3 +1,4 @@
+// TODO create super class for fills/orders/routes
 app.component("fills", {
     template: 
     '<genesis-grid name="Fills" options="$ctrl.gridOptions"></genesis-grid>',
@@ -25,28 +26,20 @@ app.component("fills", {
 })
 
 class FillsManager extends ResourceManager {
-    constructor(
-        StartDateCriteria,
-        DTA) {
-        super(DTA);
-            
-        this.StartDateCriteria = StartDateCriteria;
-    }
-    
-    createNewSubscription() {
-        var params = {
-            columns: this.columns,
-            criteria: "true " + this.StartDateCriteria.build(this.params['startDate'])
-        }
-    
-        this.cleanup();
+    constructor(DTA, CriteriaBuilder) {
+        super(
+            "ALL_TRADES", 
+            ["startDate", "endDate", "client"], 
+            DTA, CriteriaBuilder
+        );
         
-        this.stream = 
-            this.DTA.stream("ALL_TRADES", params);
-        
-        this.stream.subscribe(this.onDataFn);
+        // TODO: read from localstorage
+        this.params.client = "";
+        this.params.startDate = "15-05-2016";
+        this.params.endDate = "";
     }
 }
-FillsManager.$inject = ["StartDateCriteria", "DTA"];
+
+FillsManager.$inject = ["DTA", "CriteriaBuilder"];
 
 app.service("FillsManager", FillsManager);

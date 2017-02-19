@@ -25,32 +25,25 @@ app.component("routes", {
 })
 
 class RoutesManager extends ResourceManager {
-    constructor(
-        OrderStateCriteria, 
-        StartDateCriteria,
-        DTA) {
-        super(DTA);
-            
-        this.OrderStateCriteria = OrderStateCriteria;
-        this.StartDateCriteria = StartDateCriteria;
+    constructor(DTA, CriteriaBuilder) {
+        super(
+            "ALL_ORDERS", 
+            ["status", "startDate", "endDate", "client"], 
+            DTA, CriteriaBuilder
+        );
+        
+        // TODO: read from localstorage
+        this.params.status = "any";
+        this.params.client = "";
+        this.params.startDate = "15-05-2016";
+        this.params.endDate = "";
     }
     
-    createNewSubscription() {
-        var params = {
-            columns: this.columns,
-            criteria: "PARENT_CHILD == 'C'" + 
-                this.OrderStateCriteria.build(this.params['status']) +
-                this.StartDateCriteria.build(this.params['startDate'])
-        }
-    
-        this.cleanup();
-        
-        this.stream = 
-            this.DTA.stream("ALL_ORDERS", params);
-        
-        this.stream.subscribe(this.onDataFn);
+    method() {
+        return "PARENT_CHILD == 'C'";
     }
 }
-RoutesManager.$inject = ["OrderStateCriteria", "StartDateCriteria", "DTA"];
+
+RoutesManager.$inject = ["DTA", "CriteriaBuilder"];
 
 app.service("RoutesManager", RoutesManager);
