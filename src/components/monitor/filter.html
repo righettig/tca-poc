@@ -13,25 +13,23 @@
 <div style="padding-top: 4px; padding-bottom: 4px;">
     <div>
         Client
-        <select ng-model="selectedClient" 
-                ng-options="c for c in $ctrl.clients" 
-                ng-change="$ctrl.onFilterChanged({name:'client', value:selectedClient})"></select>
-        <button ng-click="$ctrl.onFilterChanged({name:'client', value:null});selectedClient=null">x</button>
+        <dropdown items="$ctrl.clients" 
+                  on-selected="$ctrl.onFilterChanged({name:'client', value:item})"></dropdown>
     </div>
     <div>
-        Symbol "AAPL"
-        <button ng-click="$ctrl.onFilterChanged({name:'symbol', value:'AAPL'})">✓</button>
-        <button ng-click="$ctrl.onFilterChanged({name:'symbol', value:null})">x</button>
+        Symbol
+        <dropdown items="$ctrl.symbols" 
+                  on-selected="$ctrl.onFilterChanged({name:'symbol', value:item})"></dropdown>
     </div>
     <div>
-        Basket "BSK001"
-        <button ng-click="$ctrl.onFilterChanged({name:'basket', value:'BSK001'})">✓</button>
-        <button ng-click="$ctrl.onFilterChanged({name:'basket', value:null})">x</button>
+        Basket        
+        <dropdown items="$ctrl.baskets" 
+                  on-selected="$ctrl.onFilterChanged({name:'basket', value:item})"></dropdown>
     </div>
     <div>
-        Desk "DSK001"
-        <button ng-click="$ctrl.onFilterChanged({name:'desk', value:'DSK001'})">✓</button>
-        <button ng-click="$ctrl.onFilterChanged({name:'desk', value:null})">x</button>
+        Desk        
+        <dropdown items="$ctrl.desks" 
+                  on-selected="$ctrl.onFilterChanged({name:'desk', value:item})"></dropdown>
     </div>
 </div>
 
