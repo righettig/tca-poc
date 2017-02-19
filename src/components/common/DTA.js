@@ -16,6 +16,15 @@ app.service("DTA", function() {
                     INSTRUMENT_CODE: "AAPL",
                     BASKET_ID: "BSK0001",
                     DESK_ID: "DSK0001"
+                },
+                {
+                    ORDER_ID: "ORD0002", 
+                    ENTRY_DATETIME: "20-02-2017", 
+                    ORDER_STATE: "OPEN",
+                    CLIENT_ID: "CLN0002",
+                    INSTRUMENT_CODE: "AAPL",
+                    BASKET_ID: "BSK0001",
+                    DESK_ID: "DSK0001"
                 }];
                 
                 onDataFn(rowData);
