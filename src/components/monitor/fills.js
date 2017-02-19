@@ -32,11 +32,6 @@ class FillsManager extends ResourceManager {
             ["startDate", "endDate", "client"], 
             DTA, CriteriaBuilder
         );
-        
-        // TODO: read from localstorage
-        this.params.client = "";
-        this.params.startDate = "15-05-2016";
-        this.params.endDate = "";
     }
 }
 

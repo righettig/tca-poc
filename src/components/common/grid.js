@@ -29,7 +29,7 @@ app.component('genesisGrid', {
                 this.merge(
                     this.options.columnApi.getAllDisplayedColumns().map(c => c.colId), this.mandatoryFields);
             
-            this.options.manager.init(data => {
+            this.options.manager.loadData(data => {
                 console.log("received data");
 
                 this.options.api.setRowData(data);

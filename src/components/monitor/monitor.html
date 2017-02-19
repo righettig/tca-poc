@@ -7,9 +7,9 @@
         
         <div class="col-md-9">
             <div>
-                <a ui-sref='auth.monitor.orders'>Orders</a>
-                <a ui-sref='auth.monitor.routes'>Routes</a>
-                <a ui-sref='auth.monitor.fills'>Fills</a>
+                <a ng-click="$ctrl.show('orders')">Orders</a>
+                <a ng-click="$ctrl.show('routes')">Routes</a>
+                <a ng-click="$ctrl.show('fills')">Fills</a>
             </div>
             <div ui-view></div>
         </div>    

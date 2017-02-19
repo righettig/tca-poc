@@ -31,12 +31,6 @@ class RoutesManager extends ResourceManager {
             ["status", "startDate", "endDate", "client"], 
             DTA, CriteriaBuilder
         );
-        
-        // TODO: read from localstorage
-        this.params.status = "any";
-        this.params.client = "";
-        this.params.startDate = "15-05-2016";
-        this.params.endDate = "";
     }
     
     method() {

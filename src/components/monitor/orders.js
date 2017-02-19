@@ -41,16 +41,6 @@ app.component("orders", {
     }
 })
 
-// read from localStorage
-/*
-class Session {
-    this.params.status = "any";
-    this.params.client = "";
-    this.params.startDate = "15-05-2016";
-    this.params.endDate = "";
-}
-*/
-
 class ResourceManager {
     constructor(resource, filters, DTA, CriteriaBuilder) {
         if (new.target === ResourceManager) {
@@ -59,9 +49,7 @@ class ResourceManager {
             
         this.resource = resource;
         this.filters = filters;
-        
-        this.params = {};
-    
+            
         this.stream = null;
         this.onDataFn = null;
         this.columns = null;
@@ -69,14 +57,16 @@ class ResourceManager {
         this.DTA = DTA;
         this.CriteriaBuilder = CriteriaBuilder;
     }
-        
-    onFilterChanged(name, value) {
-        this.params[name] = value;
-        
+      
+    init(params) {
+        this.params = params;
+    }
+    
+    onFilterChanged() {
         this.createNewSubscription();
     }
     
-    init(onDataFn, columns) {
+    loadData(onDataFn, columns) {
         this.onDataFn = onDataFn;
         this.columns = columns.join(" ");
             
@@ -118,12 +108,6 @@ class OrdersManager extends ResourceManager {
             ["status", "startDate", "endDate", "client"], 
             DTA, CriteriaBuilder
         );
-        
-        // TODO: read from localstorage
-        this.params.status = "any";
-        this.params.client = "";
-        this.params.startDate = "15-05-2016";
-        this.params.endDate = "";
     }
     
     method() {
