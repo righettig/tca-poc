@@ -4,10 +4,10 @@ app.run(function(FiltersCache) {
             var result = "";
             
             if (value.toLowerCase() === "active") {
-                result = '(ORDER_STATE === "OPEN" || ORDER_STATE === "ASSIGNED")';
+                result = '(ORDER_STATE == "OPEN" || ORDER_STATE == "ASSIGNED")';
                 
             } else if (value.toLowerCase() === "closed") {
-                result = '(ORDER_STATE === "CLOSED" || ORDER_STATE === "FILLED")';
+                result = '(ORDER_STATE == "CLOSED" || ORDER_STATE == "FILLED")';
             }
             
             return result;
