@@ -40,6 +40,16 @@ class CriteriaBuilder {
                 }
             })
 	}
+    
+    apply(filters, params, row) {
+        return filters
+			.map(f => {
+                return this.filtersCache.get(f).execute(params[f], row);
+            })
+            .reduce((a,p) => {
+                return a && p;
+            });
+    }
 }
 
 app.service("CriteriaBuilder", CriteriaBuilder);

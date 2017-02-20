@@ -20,6 +20,12 @@ class ResourceManager {
     }
     
     onFilterChanged() {
+//        if (clientSideFiltering) {
+//            grid.api.onFilterChanged();
+//        } else {
+//            this.createNewSubscription();
+//        }
+        
         this.createNewSubscription();
     }
     
@@ -32,6 +38,10 @@ class ResourceManager {
     
     loadMoreData() {
         //this.DTA.moreRows(this.stream);
+    }
+    
+    applyFiltering(row) {        
+        return this.CriteriaBuilder.apply(this.filters, this.params, row);
     }
     
     createNewSubscription() {

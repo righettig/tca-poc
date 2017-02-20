@@ -11,12 +11,28 @@ app.component('genesisGrid', {
             this.id = _.guid();
             $element.attr("id", this.id)
             
+            if (this.options.clientSideFiltering) {
+/*                this.options.onAfterFilterChanged = () => {
+                    if (this.api.inMemoryRowModel.getRowCount() === 0) {
+                        this.options.api.showNoRowsOverlay();
+                    } else {
+                        this.options.api.hideOverlay();
+                    }
+                }*/
+                this.options.isExternalFilterPresent = () => {
+                    return true;
+                }
+                this.options.doesExternalFilterPass = node => {
+                    return this.options.manager.applyFiltering(node.data);
+                }
+            }
+            
             this.options.onGridReady = event => {
                 this.mandatoryFields = 
                     this.options.columnDefs
                         .filter(c => c.isMandatory)
                         .map(c => c.field);
-                
+                                                
                 if (!this.options.suppressMoreRows) {
                     this.registerMoreRows();
                 }

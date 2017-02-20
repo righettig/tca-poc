@@ -11,6 +11,11 @@ app.run(function(FiltersCache) {
             }
             
             return result;
+        },
+        
+        // PLACEHOLDER
+        execute: (value, row) => {
+            return true;
         }
     });
     
@@ -19,10 +24,18 @@ app.run(function(FiltersCache) {
             var result = "";
             
             if (value) {
-                result = 'CLIENT_CODE == "' + value + '"';
+                result = 'CLIENT_ID == "' + value + '"';
             }
             
             return result;
+        },
+        
+        execute: (value, row) => {
+            if (!value) {
+                return true;
+            }
+            
+            return row.CLIENT_ID === value;
         }
     });
     
@@ -35,6 +48,11 @@ app.run(function(FiltersCache) {
             }
             
             return result;
+        },
+        
+        // PLACEHOLDER
+        execute: (value, row) => {
+            return true;
         }
     });
     
@@ -47,6 +65,11 @@ app.run(function(FiltersCache) {
             }
             
             return result;
+        },
+        
+        // PLACEHOLDER
+        execute: (value, row) => {
+            return true;
         }
     });
 });

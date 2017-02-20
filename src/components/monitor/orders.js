@@ -32,6 +32,7 @@ app.component("orders", {
         
         this.gridOptions = {
             //suppressMoreRows: true,
+            clientSideFiltering: true,
             columnDefs: columnDefs,
             manager: OrdersManager
         };
@@ -46,7 +47,8 @@ class OrdersManager extends ResourceManager {
     constructor(DTA, CriteriaBuilder) {
         super(
             "ALL_ORDERS", 
-            ["status", "startDate", "endDate", "client"], 
+            //["status", "startDate", "endDate", "client"], 
+            ["client"], 
             DTA, CriteriaBuilder
         );
     }
