@@ -28,6 +28,9 @@ app.component('genesisGrid', {
             }
             
             this.options.onGridReady = event => {
+                // so that the manager can later invoke methods such as "onFilterChanged"
+                this.options.manager.grid = this.options;
+                
                 this.mandatoryFields = 
                     this.options.columnDefs
                         .filter(c => c.isMandatory)

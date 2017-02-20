@@ -20,13 +20,12 @@ class ResourceManager {
     }
     
     onFilterChanged() {
-//        if (clientSideFiltering) {
-//            grid.api.onFilterChanged();
-//        } else {
-//            this.createNewSubscription();
-//        }
-        
-        this.createNewSubscription();
+        if (this.grid.clientSideFiltering) {
+            this.grid.api.onFilterChanged();
+            
+        } else {
+            this.createNewSubscription();
+        }
     }
     
     loadData(onDataFn, columns) {
@@ -49,14 +48,26 @@ class ResourceManager {
             columns: this.columns                
         }
     
-        if (this.method) {
-            params.criteria = 
-                this.method() + this.CriteriaBuilder.build(this.filters, this.params)
+        if (this.grid.clientSideFiltering) {
+                        if (this.method) {
+                params.criteria = 
+                    this.method() + this.CriteriaBuilder.build(this.filters, this.params)
+            } else {
+                params.criteria = 
+                    this.CriteriaBuilder.build(this.filters, this.params)
+            } 
+            
+            
         } else {
-            params.criteria = 
-                this.CriteriaBuilder.build(this.filters, this.params)
+            if (this.method) {
+                params.criteria = 
+                    this.method() + this.CriteriaBuilder.build(this.filters, this.params)
+            } else {
+                params.criteria = 
+                    this.CriteriaBuilder.build(this.filters, this.params)
+            }    
         }
-        
+                
         this.cleanup();
         
         this.stream = 
