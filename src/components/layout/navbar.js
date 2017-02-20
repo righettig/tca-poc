@@ -8,3 +8,18 @@ app.component("navbar", {
         }
     }
 })
+
+/*@Component({
+ 	selector: 'navbar'
+})
+@View({
+    templateUrl: './src/components/layout/navbar.html'
+})
+export class Navbar {
+	constructor(AuthService, $state) {
+		this.logout = function() {
+            AuthService.logout();
+            $state.go("login");
+        }
+	}
+}*/
